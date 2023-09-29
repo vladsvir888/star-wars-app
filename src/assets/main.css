@@ -1,6 +1,7 @@
 :root {
   /* palette */
   --palette-white: #fff;
+  --palette-cod-gray: #151515;
 
   /* fonts */
   --primary-font: 'Inter', sans-serif;
@@ -105,12 +106,6 @@ a {
   overflow: hidden;
   border: 0;
   clip: rect(0 0 0 0);
-}
-
-:focus-visible {
-}
-
-::selection {
 }
 
 html {

@@ -1,15 +1,36 @@
 <template>
   <header class="header">
     <div class="container header__container">
-      <AppButton href="/" variant="text" class="header__logo">
+      <AppButton 
+        class="header__logo" 
+        href="/" 
+        variant="text" 
+        @click.prevent="clickHandler('/')"
+      >
         Star Wars <span class="visually-hidden">Home</span>
       </AppButton>
       <div class="header__menu">
-        <AppButton href="/" class="header__menu-link">People</AppButton>
-        <AppButton href="/" class="header__menu-link">Search</AppButton>
+        <AppButton 
+          class="header__menu-link" 
+          href="/people" 
+          @click.prevent="clickHandler('/people')"
+        >
+          People
+        </AppButton>
+        <AppButton 
+          class="header__menu-link" 
+          href="/search" 
+          @click.prevent="clickHandler('/search')"
+        >
+          Search
+        </AppButton>
       </div>
       <ul class="header__socials">
-        <li v-for="social in socials" :key="social.label" class="header__social">
+        <li 
+          v-for="social in socials" 
+          :key="social.label" 
+          class="header__social"
+        >
           <AppIconButton
             :href="social.href"
             :name="social.name"
@@ -26,6 +47,9 @@
 <script setup>
 import AppButton from '@/components/UI/AppButton.vue'
 import AppIconButton from '@/components/UI/AppIconButton.vue'
+import router from '../router';
+
+const clickHandler = (path) => router.push(path);
 
 const socials = [
   {
