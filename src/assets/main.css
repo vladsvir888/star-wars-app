@@ -5,6 +5,10 @@
 
   /* fonts */
   --primary-font: 'Inter', sans-serif;
+
+  /* transitions */
+  --transition300ms: 0.3s;
+  --sl-transition-x-fast: var(--transition300ms);
 }
 
 *,
@@ -108,6 +112,11 @@ a {
   clip: rect(0 0 0 0);
 }
 
+:focus-visible {
+  outline: var(--sl-focus-ring);
+  outline-offset: var(--sl-focus-ring-offset);
+}
+
 html {
   height: 100%;
 }
@@ -118,7 +127,6 @@ body {
   height: 100%;
   background-image: url('/images/bg.jpg');
   background-image: image-set(url('/images/bg.webp'), url('/images/bg.jpg'));
-  background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   color: var(--palette-white);

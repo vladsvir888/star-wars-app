@@ -105,7 +105,7 @@ onMounted(() => {
   grid-area: 1 / 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .hero-slider__slider::part(button-next),
   .hero-slider__slider::part(button-prev) {
     display: none;

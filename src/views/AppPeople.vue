@@ -4,6 +4,6 @@
   </div>
 </template>
 
-<script setuo></script>
+<script setup></script>
 
-<style scoped></style>
+<style></style>

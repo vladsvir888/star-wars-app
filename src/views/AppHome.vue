@@ -7,4 +7,4 @@
 import AppHeroSlider from '@/components/AppHeroSlider.vue'
 </script>
 
-<style scoped></style>
+<style></style>
