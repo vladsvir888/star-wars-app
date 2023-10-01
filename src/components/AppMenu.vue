@@ -17,12 +17,9 @@ defineProps({
 })
 const emit = defineEmits(['menu-close'])
 const route = useRoute()
+const closeMenu = () => emit('menu-close')
 
 watch(() => route.path, closeMenu)
-
-function closeMenu() {
-  emit('menu-close')
-}
 </script>
 
 <style scoped>

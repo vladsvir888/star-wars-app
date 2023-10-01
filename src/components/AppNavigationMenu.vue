@@ -1,8 +1,8 @@
 <template>
   <nav class="navigation-menu" :class="navigationMenuClass" aria-label="Main">
-    <router-link v-for="link in links" :key="link.text" :to="link.to" class="navigation-menu__link">
+    <RouterLink v-for="link in links" :key="link.text" :to="link.to" class="navigation-menu__link">
       {{ link.text }}
-    </router-link>
+    </RouterLink>
   </nav>
 </template>
 

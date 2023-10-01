@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import AppButton from '@/components/UI/AppButton.vue'
+import AppButton from '@/components/AppButton.vue'
 </script>
 
 <style scoped>

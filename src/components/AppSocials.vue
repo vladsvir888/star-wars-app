@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import AppIconButton from '@/components/UI/AppIconButton.vue'
+import AppIconButton from '@/components/AppIconButton.vue'
 
 defineProps({
   socialsClass: String
