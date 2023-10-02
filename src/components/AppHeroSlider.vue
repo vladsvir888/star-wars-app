@@ -30,8 +30,8 @@
 </template>
 
 <script setup>
-import { register } from 'swiper/element/bundle'
 import { ref, onMounted } from 'vue'
+import { register } from 'swiper/element/bundle'
 
 register()
 

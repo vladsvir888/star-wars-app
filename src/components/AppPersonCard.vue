@@ -1,16 +1,21 @@
 <template>
   <sl-card class="person-card">
-    <!-- todo: add image -->
+    <!-- WTF: API has no images? -->
+    <img
+      slot="image"
+      class="person-card__image"
+      :src="`https://starwars-visualguide.com/assets/img/characters/${person.index}.jpg`"
+      :alt="person.name"
+    />
     <h2 class="person-card__title">{{ person.name }}</h2>
     <div slot="footer">
-      <AppButton class="person-card__button">More info</AppButton>
+      <!-- todo: add link -->
     </div>
   </sl-card>
 </template>
 
 <script setup>
 import '@shoelace-style/shoelace/dist/components/card/card.js'
-import AppButton from '@/components/AppButton.vue'
 
 defineProps({
   person: Object
@@ -21,5 +26,10 @@ defineProps({
 .person-card {
   width: 100%;
   color: var(--palette-cod-gray);
+}
+
+.person-card__image {
+  height: 400px;
+  object-fit: cover;
 }
 </style>

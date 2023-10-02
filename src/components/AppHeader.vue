@@ -1,9 +1,11 @@
 <template>
   <header class="header">
     <div class="container header__container">
-      <RouterLink v-if="$route.path !== '/'" :to="{ name: 'Home' }" class="header__logo">
-        Star Wars <span class="visually-hidden">Home</span>
-      </RouterLink>
+      <span v-if="$route.path !== '/'">
+        <AppLink :to="{ name: 'Home' }" class="header__logo">
+          Star Wars <span class="visually-hidden">Home</span>
+        </AppLink>
+      </span>
       <p v-else class="header__logo">Star Wars</p>
       <AppNavigationMenu navigation-menu-class="header__navigation-menu" />
       <AppSocials socials-class="header__socials" />
@@ -14,11 +16,12 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import AppSocials from '@/components/AppSocials.vue'
 import AppIconButton from '@/components/AppIconButton.vue'
 import AppMenu from '@/components/AppMenu.vue'
 import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
-import { ref } from 'vue'
+import AppLink from '@/components/AppLink.vue'
 
 const isMenuOpen = ref(false)
 </script>

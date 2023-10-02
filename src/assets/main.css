@@ -133,6 +133,11 @@ body {
   font-family: var(--primary-font);
 }
 
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
 .header {
   flex-shrink: 0;
 }

@@ -1,12 +1,16 @@
 <template>
   <nav class="navigation-menu" :class="navigationMenuClass" aria-label="Main">
-    <RouterLink v-for="link in links" :key="link.text" :to="link.to" class="navigation-menu__link">
-      {{ link.text }}
-    </RouterLink>
+    <span v-for="link in links" :key="link.text">
+      <AppLink :to="link.to" class="link--decoration link--hover navigation-menu__link">
+        {{ link.text }}
+      </AppLink>
+    </span>
   </nav>
 </template>
 
 <script setup>
+import AppLink from '@/components/AppLink.vue'
+
 defineProps({
   navigationMenuClass: String
 })
@@ -37,19 +41,9 @@ const links = [
 .navigation-menu {
   display: flex;
   margin-right: auto;
-  font-weight: 700;
 }
 
 .navigation-menu__link {
   padding: 5px 15px;
-  transition: color var(--transition300ms);
-}
-
-.navigation-menu__link:where(.router-link-active) {
-  color: var(--sl-color-primary-600);
-}
-
-.navigation-menu__link:hover {
-  color: var(--sl-color-primary-600);
 }
 </style>

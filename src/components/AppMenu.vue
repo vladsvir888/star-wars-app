@@ -6,11 +6,11 @@
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router'
+import { watch } from 'vue'
 import '@shoelace-style/shoelace/dist/components/drawer/drawer.js'
 import AppSocials from '@/components/AppSocials.vue'
 import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
-import { useRoute } from 'vue-router'
-import { watch } from 'vue'
 
 defineProps({
   isMenuOpen: Boolean

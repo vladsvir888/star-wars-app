@@ -14,15 +14,13 @@
         </picture>
       </div>
       <h1 class="not-found__title">THIS PAGE IS NOT FULLY ARMED AND OPERATIONAL.</h1>
-      <AppButton class="not-found__button" href="/" @click.prevent="$router.push({ name: 'Home' })">
-        Go to home
-      </AppButton>
+      <AppLink :to="{ name: 'Home' }" class="link--hover link--decoration">Go to home</AppLink>
     </div>
   </section>
 </template>
 
 <script setup>
-import AppButton from '@/components/AppButton.vue'
+import AppLink from '@/components/AppLink.vue'
 </script>
 
 <style scoped>
@@ -30,7 +28,6 @@ import AppButton from '@/components/AppButton.vue'
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 20px;
   padding: 20px 10px;
   background-color: var(--palette-cod-gray);
 }
