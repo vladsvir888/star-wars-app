@@ -1,24 +1,26 @@
 <template>
   <div class="pagination">
-    <AppIconButton
-      name="arrow-left"
-      label="Previous"
+    <AppButton
       class="pagination__button"
       :disabled="!pagination.previous"
       @click="$emit('pagination-click', pagination.previous)"
-    ></AppIconButton>
-    <AppIconButton
-      name="arrow-right"
-      label="Next"
+    >
+      <sl-icon class="pagination__icon" name="arrow-left" slot="prefix"></sl-icon>
+      Previous
+    </AppButton>
+    <AppButton
       class="pagination__button"
       :disabled="!pagination.next"
       @click="$emit('pagination-click', pagination.next)"
-    ></AppIconButton>
+    >
+      <sl-icon class="pagination__icon" name="arrow-right" slot="suffix"></sl-icon>
+      Next
+    </AppButton>
   </div>
 </template>
 
 <script setup>
-import AppIconButton from '@/components/AppIconButton.vue'
+import AppButton from '@/components/AppButton.vue'
 
 defineProps({
   pagination: Object
@@ -30,15 +32,10 @@ defineProps({
   display: flex;
   justify-content: flex-end;
   column-gap: 15px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
-.pagination__button {
-  font-size: 35px;
-  color: currentColor;
-}
-
-.pagination__button::part(base) {
-  padding: 0;
+.pagination__icon {
+  font-size: 20px;
 }
 </style>

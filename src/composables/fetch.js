@@ -20,3 +20,17 @@ export async function useFetch(url) {
 
   return { data, error }
 }
+
+export async function useFetchWithPromiseAll(urls) {
+  const data = ref(null)
+  const error = ref(null)
+
+  try {
+    const responses = await Promise.all(urls.map((url) => fetch(url)))
+    data.value = await Promise.all(responses.map((response) => response.json()))
+  } catch (err) {
+    error.value = err
+  }
+
+  return { data, error }
+}
