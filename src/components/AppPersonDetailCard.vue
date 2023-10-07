@@ -2,7 +2,7 @@
   <sl-card class="person-detail-card">
     <img :src="`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`" :alt="name" />
     <div class="person-detail-card__content">
-      <h1>{{ name }}</h1>
+      <h1 class="person-detail-card__title">{{ name }}</h1>
       <dl class="person-detail-card__list">
         <div v-for="(value, key) in properties" :key="key" class="person-detail-card__item">
           <dt class="person-detail-card__term">{{ transformTerm(key) }}:</dt>
@@ -18,8 +18,8 @@ import { transformTerm } from '@/utils/transformTerm.js'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 
 defineProps({
-  name: String,
   id: String,
+  name: String,
   properties: Object
 })
 </script>
@@ -47,5 +47,11 @@ defineProps({
 
 .person-detail-card__term {
   font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .person-detail-card__title {
+    font-size: 30px;
+  }
 }
 </style>

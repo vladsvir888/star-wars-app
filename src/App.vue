@@ -1,13 +1,7 @@
 <template>
   <AppHeader />
   <main class="main">
-    <RouterView v-slot="{ Component }">
-      <Suspense>
-        <div>
-          <component :is="Component"></component>
-        </div>
-      </Suspense>
-    </RouterView>
+    <RouterView></RouterView>
   </main>
   <AppFooter />
 </template>

@@ -21,7 +21,7 @@
         />
         <ul class="people__list">
           <li v-for="person in data.results" :key="person.name" class="people-list__item">
-            <AppPersonCard :person="{ ...person, idx: getIdByRegex(person.url, /\d+/) }" />
+            <AppPersonCard :name="person.name" :id="getIdByRegex(person.url, /\d+/)" />
           </li>
         </ul>
       </div>
@@ -31,18 +31,29 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useFetch } from '@/composables/fetch.js'
+import { ref, computed, watchEffect } from 'vue'
 import { getIdByRegex } from '@/utils/getIdByRegex.js'
+import { fetchData } from '@/utils/fetch.js'
 import { API_BASE_URL, API_TEXT_ERROR } from '@/constants'
 import AppPersonCard from '@/components/AppPersonCard.vue'
 import AppPagination from '@/components/AppPagination.vue'
 import AppSpinner from '@/components/AppSpinner.vue'
 import AppAlert from '@/components/AppAlert.vue'
 
+const data = ref(null)
+const error = ref(null)
 const id = ref('1')
 const url = computed(() => `${API_BASE_URL}/people/?page=${id.value}`)
-const { data, error } = await useFetch(url)
+
+watchEffect(async () => {
+  data.value = null
+
+  try {
+    data.value = await fetchData(url.value)
+  } catch (err) {
+    error.value = err
+  }
+})
 </script>
 
 <style scoped>

@@ -7,8 +7,8 @@
         </AppLink>
       </span>
       <p v-else class="header__logo">Star Wars</p>
-      <AppNavigationMenu navigation-menu-class="header__navigation-menu" />
-      <AppSocials socials-class="header__socials" />
+      <AppNavigationMenu class="header__navigation-menu" />
+      <AppSocials class="header__socials" />
       <AppIconButton @click="isMenuOpen = true" name="list" class="header__burger" label="Menu" />
     </div>
     <AppMenu :is-menu-open="isMenuOpen" @menu-close="isMenuOpen = false" />

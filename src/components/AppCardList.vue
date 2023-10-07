@@ -5,19 +5,29 @@
     </div>
     <ul v-if="data.length" class="card-list__list">
       <li v-for="item of data" :key="item.name">
-        {{ item.name }}
+        <AppLink
+          v-if="isItemLink"
+          :to="{ name: 'Person', params: { id: getIdByRegex(item.url, /\d+/) } }"
+          class="link--decoration link--hover"
+          >{{ item.name }}</AppLink
+        >
+        <span v-else>{{ item.name }}</span>
       </li>
     </ul>
-    <p v-else class="card-list__text">There are no items for this category...</p>
+    <p v-else class="card-list__text">There are no items...</p>
   </sl-card>
 </template>
 
 <script setup>
+import { getIdByRegex } from '@/utils/getIdByRegex'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
+import AppLink from '@/components/AppLink.vue'
 
 defineProps({
+  type: String,
   data: Array,
-  title: String
+  title: String,
+  isItemLink: Boolean
 })
 </script>
 

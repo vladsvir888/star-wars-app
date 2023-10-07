@@ -3,13 +3,13 @@
     <img
       slot="image"
       class="person-card__image"
-      :src="`https://starwars-visualguide.com/assets/img/characters/${person.idx}.jpg`"
-      :alt="person.name"
+      :src="`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`"
+      :alt="name"
     />
-    <h2 class="person-card__title">{{ person.name }}</h2>
+    <h2 class="person-card__title">{{ name }}</h2>
     <div slot="footer">
       <AppLink
-        :to="{ name: 'Person', params: { id: person.idx } }"
+        :to="{ name: 'Person', params: { id } }"
         class="link--decoration link--hover person-card__link"
       >
         More info
@@ -23,7 +23,8 @@ import '@shoelace-style/shoelace/dist/components/card/card.js'
 import AppLink from '@/components/AppLink.vue'
 
 defineProps({
-  person: Object
+  name: String,
+  id: String
 })
 </script>
 

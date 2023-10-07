@@ -36,7 +36,7 @@ import { register } from 'swiper/element/bundle'
 register()
 
 const slider = ref(null)
-const slides = [
+const slides = ref([
   {
     title: 'How the ILM Model Shop Brought Ahsoka’s T-6 Jedi Shuttle to Life',
     text: 'Go behind the scenes with Industrial Light Magic model maker John Goodson to explore Ahsoka’s Jedi shuttle.'
@@ -48,7 +48,7 @@ const slides = [
       lazy: true
     }
   }
-]
+])
 
 onMounted(() => {
   const sliderElement = slider.value

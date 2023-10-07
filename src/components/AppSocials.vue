@@ -1,5 +1,5 @@
 <template>
-  <ul class="socials" :class="socialsClass">
+  <ul class="socials">
     <li v-for="social in socials" :key="social.label" class="socials__social">
       <AppIconButton
         :href="social.href"
@@ -13,13 +13,10 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import AppIconButton from '@/components/AppIconButton.vue'
 
-defineProps({
-  socialsClass: String
-})
-
-const socials = [
+const socials = ref([
   {
     href: 'https://www.instagram.com/starwars/',
     label: 'instagram',
@@ -40,7 +37,7 @@ const socials = [
     label: 'tiktok',
     name: 'tiktok'
   }
-]
+])
 </script>
 
 <style scoped>

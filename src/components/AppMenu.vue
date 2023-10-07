@@ -1,13 +1,11 @@
 <template>
-  <sl-drawer :open="isMenuOpen" @sl-request-close="closeMenu" label="Menu" class="menu">
-    <AppNavigationMenu navigation-menu-class="menu__navigation-menu" />
-    <AppSocials socials-class="menu__socials" />
+  <sl-drawer :open="isMenuOpen" label="Menu" class="menu" @click="$emit('menu-close')">
+    <AppNavigationMenu class="menu__navigation-menu" :is-menu-open="isMenuOpen" />
+    <AppSocials class="menu__socials" />
   </sl-drawer>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
-import { watch } from 'vue'
 import '@shoelace-style/shoelace/dist/components/drawer/drawer.js'
 import AppSocials from '@/components/AppSocials.vue'
 import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
@@ -15,11 +13,6 @@ import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
 defineProps({
   isMenuOpen: Boolean
 })
-const emit = defineEmits(['menu-close'])
-const route = useRoute()
-const closeMenu = () => emit('menu-close')
-
-watch(() => route.path, closeMenu)
 </script>
 
 <style scoped>
