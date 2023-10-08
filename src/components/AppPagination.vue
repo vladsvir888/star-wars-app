@@ -19,12 +19,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IPagination } from '@/types'
 import AppButton from '@/components/AppButton.vue'
 
-defineProps({
-  pagination: Object
-})
+defineProps<{
+  pagination: IPagination
+}>()
+
+defineEmits<{
+  (e: 'pagination-click', value: string | null): void
+}>()
 </script>
 
 <style scoped>

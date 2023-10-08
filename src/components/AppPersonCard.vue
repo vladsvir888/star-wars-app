@@ -18,14 +18,12 @@
   </sl-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IPersonCard } from '@/types';
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 import AppLink from '@/components/AppLink.vue'
 
-defineProps({
-  name: String,
-  id: String
-})
+defineProps<IPersonCard>()
 </script>
 
 <style scoped>

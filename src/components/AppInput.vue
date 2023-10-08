@@ -14,21 +14,16 @@
   </sl-input>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IInput } from '@/types';
 import '@shoelace-style/shoelace/dist/components/input/input.js'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 
-defineProps({
-  type: String,
-  label: String,
-  clearable: Boolean,
-  icon: Object,
-  helpText: String,
-  disabled: Boolean,
-  modelValue: String
-})
-
-defineEmits(['update:modelValue', 'clear'])
+defineProps<IInput>()
+defineEmits<{
+  (e: 'update:modelValue', value: string): void
+  (e: 'clear'): void
+}>()
 </script>
 
 <style scoped></style>

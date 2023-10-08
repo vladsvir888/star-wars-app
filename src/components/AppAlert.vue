@@ -5,12 +5,13 @@
   </sl-alert>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IAlert } from '@/types';
 import '@shoelace-style/shoelace/dist/components/alert/alert.js'
 
-defineProps({
-  alert: Object
-})
+defineProps<{
+  alert: IAlert
+}>()
 </script>
 
 <style scoped>

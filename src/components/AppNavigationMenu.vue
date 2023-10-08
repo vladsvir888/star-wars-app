@@ -12,13 +12,13 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import AppLink from '@/components/AppLink.vue'
 
-defineProps({
-  isMenuOpen: Boolean
-})
+defineEmits<{
+  (e: 'menu-close'): void
+}>()
 
 const links = ref([
   {

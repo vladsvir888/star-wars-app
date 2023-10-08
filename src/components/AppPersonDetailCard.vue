@@ -13,15 +13,12 @@
   </sl-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IPersonDetailCard } from '@/types'
 import { transformTerm } from '@/utils/transformTerm.js'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 
-defineProps({
-  id: String,
-  name: String,
-  properties: Object
-})
+defineProps<IPersonDetailCard>()
 </script>
 
 <style scoped>

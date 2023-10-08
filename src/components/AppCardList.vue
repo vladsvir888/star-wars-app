@@ -18,7 +18,7 @@
   </sl-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { getIdByRegex } from '@/utils/getIdByRegex'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 import AppLink from '@/components/AppLink.vue'

@@ -5,14 +5,18 @@
   </sl-drawer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/drawer/drawer.js'
 import AppSocials from '@/components/AppSocials.vue'
 import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
 
-defineProps({
-  isMenuOpen: Boolean
-})
+defineProps<{
+  isMenuOpen: boolean;
+}>()
+
+defineEmits<{
+  (e: 'menu-close'): void
+}>()
 </script>
 
 <style scoped>
