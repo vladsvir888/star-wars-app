@@ -11,7 +11,7 @@ import AppSocials from '@/components/AppSocials.vue'
 import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
 
 defineProps<{
-  isMenuOpen: boolean;
+  isMenuOpen: boolean
 }>()
 
 defineEmits<{

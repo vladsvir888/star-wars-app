@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IInput } from '@/types';
+import type { IInput } from '@/types'
 import '@shoelace-style/shoelace/dist/components/input/input.js'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
 

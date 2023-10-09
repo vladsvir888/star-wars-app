@@ -11,13 +11,13 @@
           text: API_TEXT_ERROR
         }"
       />
-      <div v-else-if="data" class="people__wrap">
+      <div v-if="data" class="people__wrap">
         <AppPagination
           :pagination="{
             previous: data.previous ? getIdByRegex(data.previous, /\d+/) : null,
             next: data.next ? getIdByRegex(data.next, /\d+/) : null
           }"
-          @pagination-click="(num) => (id = num)"
+          @pagination-click="(num) => (id = num as string)"
         />
         <ul class="people__list">
           <li v-for="person in data.results" :key="person.name" class="people-list__item">
@@ -30,18 +30,19 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IPeople } from '@/types'
 import { ref, computed, watchEffect } from 'vue'
-import { getIdByRegex } from '@/utils/getIdByRegex.js'
-import { fetchData } from '@/utils/fetch.js'
+import { getIdByRegex } from '@/utils/getIdByRegex'
+import { fetchData } from '@/utils/fetch'
 import { API_BASE_URL, API_TEXT_ERROR } from '@/constants'
 import AppPersonCard from '@/components/AppPersonCard.vue'
 import AppPagination from '@/components/AppPagination.vue'
 import AppSpinner from '@/components/AppSpinner.vue'
 import AppAlert from '@/components/AppAlert.vue'
 
-const data = ref(null)
-const error = ref(null)
+const data = ref<IPeople | null>(null)
+const error = ref<Error | null>(null)
 const id = ref('1')
 const url = computed(() => `${API_BASE_URL}/people/?page=${id.value}`)
 
@@ -51,7 +52,9 @@ watchEffect(async () => {
   try {
     data.value = await fetchData(url.value)
   } catch (err) {
-    error.value = err
+    if (err instanceof Error) {
+      error.value = err
+    }
   }
 })
 </script>

@@ -19,7 +19,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppLink from '@/components/AppLink.vue'
 </script>
 

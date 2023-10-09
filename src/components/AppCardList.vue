@@ -3,15 +3,15 @@
     <div slot="header">
       <h2 class="card-list__title">{{ title }}</h2>
     </div>
-    <ul v-if="data.length" class="card-list__list">
-      <li v-for="item of data" :key="item.name">
+    <ul v-if="data" class="card-list__list">
+      <li v-for="(value, key) of data" :key="key">
         <AppLink
           v-if="isItemLink"
-          :to="{ name: 'Person', params: { id: getIdByRegex(item.url, /\d+/) } }"
+          :to="{ name: 'Person', params: { id: getIdByRegex(data.url, /\d+/) } }"
           class="link--decoration link--hover"
-          >{{ item.name }}</AppLink
+          >{{ data.name }}</AppLink
         >
-        <span v-else>{{ item.name }}</span>
+        <span v-else>{{ data.name }}</span>
       </li>
     </ul>
     <p v-else class="card-list__text">There are no items...</p>
@@ -19,16 +19,12 @@
 </template>
 
 <script setup lang="ts">
+import type { ICardList } from '@/types'
 import { getIdByRegex } from '@/utils/getIdByRegex'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 import AppLink from '@/components/AppLink.vue'
 
-defineProps({
-  type: String,
-  data: Array,
-  title: String,
-  isItemLink: Boolean
-})
+defineProps<ICardList>()
 </script>
 
 <style scoped>

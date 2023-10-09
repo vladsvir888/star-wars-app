@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IPersonCard } from '@/types';
+import type { IPersonCard } from '@/types'
 import '@shoelace-style/shoelace/dist/components/card/card.js'
 import AppLink from '@/components/AppLink.vue'
 

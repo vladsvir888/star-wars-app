@@ -1,5 +1,6 @@
 <template>
-  <RouterLink class="link">
+  <!-- default to need this -->
+  <RouterLink to="/" class="link">
     <slot></slot>
   </RouterLink>
 </template>
