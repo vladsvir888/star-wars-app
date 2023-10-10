@@ -4,7 +4,6 @@
     :type="type ? type : 'text'"
     :label="label"
     :clearable="clearable"
-    :help-text="helpText"
     :disabled="disabled"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"

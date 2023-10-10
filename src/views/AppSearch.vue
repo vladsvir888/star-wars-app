@@ -39,7 +39,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { debounce } from 'lodash-es'
 import { ref, computed, watch } from 'vue'
 import { fetchData } from '@/utils/fetch.js'
@@ -50,7 +50,7 @@ import AppCardList from '@/components/AppCardList.vue'
 import AppAlert from '@/components/AppAlert.vue'
 
 const data = ref(null)
-const error = ref(null)
+const error = ref<Error | null>(null)
 const searchText = ref('')
 const url = computed(() => `${API_BASE_URL}/people/?search=${searchText.value}`)
 const debouncedFetch = debounce(async () => {
@@ -58,8 +58,12 @@ const debouncedFetch = debounce(async () => {
 
   try {
     data.value = await fetchData(url.value)
+
+    console.log(data.value, 'data.value');
   } catch (err) {
-    error.value = err
+    if (err instanceof Error) {
+      error.value = err
+    }
   }
 }, 750)
 
