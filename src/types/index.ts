@@ -6,39 +6,20 @@ export interface IAlert {
 }
 
 export interface IInput {
-  type: string
+  type?: string
   label: string
   clearable: boolean
   disabled: boolean
-  modelValue: string
   icon: {
     name: string
     slot?: string
   }
+  modelValue: string
 }
 
 export interface IPagination {
   previous: string | null
   next: string | null
-}
-
-export interface IPerson {
-  birth_year: string
-  created: string
-  edited: string
-  eye_color: string
-  films: string[]
-  gender: string
-  hair_color: string
-  height: string
-  homeworld: string
-  mass: string
-  name: string
-  skin_color: string
-  species: string[]
-  starships: string[]
-  url: string
-  vehicles: string[]
 }
 
 export interface IPersonCard {
@@ -47,20 +28,47 @@ export interface IPersonCard {
 }
 
 export interface IPersonDetailCard {
-  id: string
-  name: string
-  properties: IPerson
+  id: string | string[]
+  properties: {
+    name: string
+    height: string
+    mass: string
+    hair_color: string
+    skin_color: string
+    eye_color: string
+    birth_year: string
+    gender: string
+  }
 }
 
 export interface ICardList {
   title: string
-  isItemLink: boolean
+  isItemLink?: boolean
   data: {
     name: string
     url: string
-  }
+  }[]
+}
+
+export interface IPerson {
+  name: string
+  height: string
+  mass: string
+  hair_color: string
+  skin_color: string
+  eye_color: string
+  birth_year: string
+  gender: string
+  starships: string[]
+  vehicles: string[]
+  url: string
 }
 
 export interface IPeople extends IPagination {
   results: IPerson[]
+}
+
+export interface ICraft {
+  name: string
+  url: string
 }

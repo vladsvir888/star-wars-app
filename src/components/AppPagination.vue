@@ -2,16 +2,16 @@
   <div class="pagination">
     <AppButton
       class="pagination__button"
-      :disabled="!pagination.previous"
-      @click="$emit('pagination-click', pagination.previous)"
+      :disabled="!previous"
+      @click="$emit('pagination-click', previous)"
     >
       <sl-icon class="pagination__icon" name="arrow-left" slot="prefix"></sl-icon>
       Previous
     </AppButton>
     <AppButton
       class="pagination__button"
-      :disabled="!pagination.next"
-      @click="$emit('pagination-click', pagination.next)"
+      :disabled="!next"
+      @click="$emit('pagination-click', next)"
     >
       <sl-icon class="pagination__icon" name="arrow-right" slot="suffix"></sl-icon>
       Next
@@ -23,9 +23,7 @@
 import type { IPagination } from '@/types'
 import AppButton from '@/components/AppButton.vue'
 
-defineProps<{
-  pagination: IPagination
-}>()
+defineProps<IPagination>()
 
 defineEmits<{
   (e: 'pagination-click', value: string | null): void

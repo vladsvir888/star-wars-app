@@ -7,7 +7,6 @@
         v-model="searchText"
         @input="debouncedFetch"
         label="Search"
-        type="search"
         clearable
         :disabled="!data"
         :icon="{
@@ -18,12 +17,10 @@
       <div class="search__content">
         <AppAlert
           v-if="error"
-          :alert="{
-            variant: 'danger',
-            closable: true,
-            icon: 'exclamation-octagon',
-            text: API_TEXT_ERROR
-          }"
+          variant="danger"
+          :closable="true"
+          icon="exclamation-octagon"
+          :text="API_TEXT_ERROR"
         />
         <template v-else-if="data">
           <AppCardList
@@ -40,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+import type { IPeople } from '@/types'
 import { debounce } from 'lodash-es'
 import { ref, computed, watch } from 'vue'
 import { fetchData } from '@/utils/fetch.js'
@@ -49,7 +47,7 @@ import AppSpinner from '@/components/AppSpinner.vue'
 import AppCardList from '@/components/AppCardList.vue'
 import AppAlert from '@/components/AppAlert.vue'
 
-const data = ref(null)
+const data = ref<IPeople | null>(null)
 const error = ref<Error | null>(null)
 const searchText = ref('')
 const url = computed(() => `${API_BASE_URL}/people/?search=${searchText.value}`)
@@ -58,8 +56,6 @@ const debouncedFetch = debounce(async () => {
 
   try {
     data.value = await fetchData(url.value)
-
-    console.log(data.value, 'data.value');
   } catch (err) {
     if (err instanceof Error) {
       error.value = err

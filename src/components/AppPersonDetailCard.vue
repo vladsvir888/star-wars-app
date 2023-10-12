@@ -1,8 +1,11 @@
 <template>
   <sl-card class="person-detail-card">
-    <img :src="`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`" :alt="name" />
+    <img
+      :src="`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`"
+      :alt="properties.name"
+    />
     <div class="person-detail-card__content">
-      <h1 class="person-detail-card__title">{{ name }}</h1>
+      <h1 class="person-detail-card__title">{{ properties.name }}</h1>
       <dl class="person-detail-card__list">
         <div v-for="(value, key) in properties" :key="key" class="person-detail-card__item">
           <dt class="person-detail-card__term">{{ transformTerm(key) }}:</dt>

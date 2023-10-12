@@ -4,19 +4,15 @@
       <h1>People</h1>
       <AppAlert
         v-if="error"
-        :alert="{
-          variant: 'danger',
-          closable: true,
-          icon: 'exclamation-octagon',
-          text: API_TEXT_ERROR
-        }"
+        variant="danger"
+        :closable="true"
+        icon="exclamation-octagon"
+        :text="API_TEXT_ERROR"
       />
       <div v-if="data" class="people__wrap">
         <AppPagination
-          :pagination="{
-            previous: data.previous ? getIdByRegex(data.previous, /\d+/) : null,
-            next: data.next ? getIdByRegex(data.next, /\d+/) : null
-          }"
+          :previous="data.previous ? getIdByRegex(data.previous, /\d+/) : null"
+          :next="data.next ? getIdByRegex(data.next, /\d+/) : null"
           @pagination-click="(num) => (id = num as string)"
         />
         <ul class="people__list">

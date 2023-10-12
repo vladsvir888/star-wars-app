@@ -3,46 +3,41 @@
     <div class="container">
       <AppAlert
         v-if="error"
-        :alert="{
-          variant: 'danger',
-          closable: true,
-          icon: 'exclamation-octagon',
-          text: API_TEXT_ERROR
-        }"
+        variant="danger"
+        :closable="true"
+        icon="exclamation-octagon"
+        :text="API_TEXT_ERROR"
       />
       <div v-else-if="data" class="person__grid">
         <AppPersonDetailCard
-          :name="data.name"
           :id="id"
           :properties="{
+            name: data.name,
             height: data.height,
             mass: data.mass,
             hair_color: data.hair_color,
             skin_color: data.skin_color,
+            eye_color: data.eye_color,
             birth_year: data.birth_year,
             gender: data.gender
           }"
         />
         <AppAlert
-          v-if="errorVehicles"
-          :alert="{
-            variant: 'danger',
-            closable: true,
-            icon: 'exclamation-octagon',
-            text: API_TEXT_ERROR
-          }"
+          v-if="error"
+          variant="danger"
+          :closable="true"
+          icon="exclamation-octagon"
+          :text="API_TEXT_ERROR"
         />
         <AppCardList v-if="dataVehicles" :data="dataVehicles" title="Vehicles" type="Vehicles" />
         <AppSpinner v-else />
 
         <AppAlert
-          v-if="errorStarships"
-          :alert="{
-            variant: 'danger',
-            closable: true,
-            icon: 'exclamation-octagon',
-            text: API_TEXT_ERROR
-          }"
+          v-if="error"
+          variant="danger"
+          :closable="true"
+          icon="exclamation-octagon"
+          :text="API_TEXT_ERROR"
         />
         <AppCardList
           v-if="dataStarships"
@@ -57,7 +52,8 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { IPerson, ICraft } from '@/types'
 import { ref, computed, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { fetchData, fetchDataWithPromiseAll } from '@/utils/fetch.js'
@@ -68,12 +64,12 @@ import AppSpinner from '@/components/AppSpinner.vue'
 import AppAlert from '@/components/AppAlert.vue'
 
 const route = useRoute()
-const data = ref(null)
-const error = ref(null)
-const dataStarships = ref(null)
-const errorStarships = ref(null)
-const dataVehicles = ref(null)
-const errorVehicles = ref(null)
+const data = ref<IPerson | null>(null)
+const error = ref<Error | null>(null)
+const dataStarships = ref<ICraft[] | null>(null)
+const errorStarships = ref<Error | null>(null)
+const dataVehicles = ref<ICraft[] | null>(null)
+const errorVehicles = ref<Error | null>(null)
 const id = ref(route.params.id)
 const url = computed(() => `${API_BASE_URL}/people/${id.value}`)
 
@@ -83,7 +79,9 @@ watchEffect(async () => {
   try {
     data.value = await fetchData(url.value)
   } catch (err) {
-    error.value = err
+    if (err instanceof Error) {
+      error.value = err
+    }
   }
 })
 
@@ -92,11 +90,15 @@ watch(data, async () => {
   dataVehicles.value = null
 
   try {
-    dataStarships.value = await fetchDataWithPromiseAll(data.value.starships)
-    dataVehicles.value = await fetchDataWithPromiseAll(data.value.vehicles)
+    if (data.value !== null) {
+      dataStarships.value = await fetchDataWithPromiseAll(data.value.starships)
+      dataVehicles.value = await fetchDataWithPromiseAll(data.value.vehicles)
+    }
   } catch (err) {
-    errorStarships.value = err
-    errorVehicles.value = err
+    if (err instanceof Error) {
+      errorStarships.value = err
+      errorVehicles.value = err
+    }
   }
 })
 </script>

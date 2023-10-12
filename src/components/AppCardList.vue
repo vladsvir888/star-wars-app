@@ -3,15 +3,16 @@
     <div slot="header">
       <h2 class="card-list__title">{{ title }}</h2>
     </div>
-    <ul v-if="data" class="card-list__list">
-      <li v-for="(value, key) of data" :key="key">
+    <ul v-if="data.length" class="card-list__list">
+      <li v-for="item of data" :key="item.name">
         <AppLink
           v-if="isItemLink"
-          :to="{ name: 'Person', params: { id: getIdByRegex(data.url, /\d+/) } }"
+          :to="{ name: 'Person', params: { id: getIdByRegex(item.url, /\d+/) } }"
           class="link--decoration link--hover"
-          >{{ data.name }}</AppLink
         >
-        <span v-else>{{ data.name }}</span>
+          {{ item.name }}
+        </AppLink>
+        <span v-else>{{ item.name }}</span>
       </li>
     </ul>
     <p v-else class="card-list__text">There are no items...</p>

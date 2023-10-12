@@ -28,7 +28,6 @@ const route = useRoute()
 const checkRoute = computed(() => {
   return route.path !== '/'
 })
-
 const isMenuOpen = ref(false)
 </script>
 
