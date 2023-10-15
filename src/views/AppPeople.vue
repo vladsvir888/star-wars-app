@@ -3,20 +3,26 @@
     <div class="container">
       <h1>People</h1>
       <AppAlert
-        v-if="error"
+        v-if="peopleStore.error"
         variant="danger"
         :closable="true"
         icon="exclamation-octagon"
         :text="API_TEXT_ERROR"
       />
-      <div v-if="data" class="people__wrap">
+      <div v-if="peopleStore.data" class="people__wrap">
         <AppPagination
-          :previous="data.previous ? getIdByRegex(data.previous, /\d+/) : null"
-          :next="data.next ? getIdByRegex(data.next, /\d+/) : null"
-          @pagination-click="(num) => (id = num as string)"
+          :previous="
+            peopleStore.data.previous ? getIdByRegex(peopleStore.data.previous, /\d+/) : null
+          "
+          :next="peopleStore.data.next ? getIdByRegex(peopleStore.data.next, /\d+/) : null"
+          @pagination-click="(num) => (peopleStore.id = num as string)"
         />
         <ul class="people__list">
-          <li v-for="person in data.results" :key="person.name" class="people-list__item">
+          <li
+            v-for="person in peopleStore.data.results"
+            :key="person.name"
+            class="people-list__item"
+          >
             <AppPersonCard :name="person.name" :id="getIdByRegex(person.url, /\d+/)" />
           </li>
         </ul>
@@ -27,32 +33,15 @@
 </template>
 
 <script setup lang="ts">
-import type { IPeople } from '@/types'
-import { ref, computed, watchEffect } from 'vue'
+import { usePeopleStore } from '@/stores/peopleStore'
 import { getIdByRegex } from '@/utils/getIdByRegex'
-import { fetchData } from '@/utils/fetch'
-import { API_BASE_URL, API_TEXT_ERROR } from '@/constants'
+import { API_TEXT_ERROR } from '@/constants'
 import AppPersonCard from '@/components/AppPersonCard.vue'
 import AppPagination from '@/components/AppPagination.vue'
 import AppSpinner from '@/components/AppSpinner.vue'
 import AppAlert from '@/components/AppAlert.vue'
 
-const data = ref<IPeople | null>(null)
-const error = ref<Error | null>(null)
-const id = ref('1')
-const url = computed(() => `${API_BASE_URL}/people/?page=${id.value}`)
-
-watchEffect(async () => {
-  data.value = null
-
-  try {
-    data.value = await fetchData(url.value)
-  } catch (err) {
-    if (err instanceof Error) {
-      error.value = err
-    }
-  }
-})
+const peopleStore = usePeopleStore()
 </script>
 
 <style scoped>

@@ -4,28 +4,28 @@
       <h1>Search</h1>
       <AppInput
         class="search__input"
-        v-model="searchText"
-        @input="debouncedFetch"
+        v-model="searchStore.searchText"
+        @input="searchStore.debouncedFetch"
         label="Search"
         clearable
-        :disabled="!data"
+        :disabled="!searchStore.data"
         :icon="{
           name: 'search'
         }"
-        @clear="searchText = ''"
+        @clear="searchStore.searchText = ''"
       />
       <div class="search__content">
         <AppAlert
-          v-if="error"
+          v-if="searchStore.error"
           variant="danger"
           :closable="true"
           icon="exclamation-octagon"
           :text="API_TEXT_ERROR"
         />
-        <template v-else-if="data">
+        <template v-else-if="searchStore.data">
           <AppCardList
             title="Found people"
-            :data="data.results"
+            :data="searchStore.data.results"
             :is-item-link="true"
             class="search__card"
           />
@@ -37,33 +37,14 @@
 </template>
 
 <script setup lang="ts">
-import type { IPeople } from '@/types'
-import { debounce } from 'lodash-es'
-import { ref, computed, watch } from 'vue'
-import { fetchData } from '@/utils/fetch.js'
-import { API_BASE_URL, API_TEXT_ERROR } from '@/constants'
+import { useSearchStore } from '@/stores/searchStore'
+import { API_TEXT_ERROR } from '@/constants'
 import AppInput from '@/components/AppInput.vue'
 import AppSpinner from '@/components/AppSpinner.vue'
 import AppCardList from '@/components/AppCardList.vue'
 import AppAlert from '@/components/AppAlert.vue'
 
-const data = ref<IPeople | null>(null)
-const error = ref<Error | null>(null)
-const searchText = ref('')
-const url = computed(() => `${API_BASE_URL}/people/?search=${searchText.value}`)
-const debouncedFetch = debounce(async () => {
-  data.value = null
-
-  try {
-    data.value = await fetchData(url.value)
-  } catch (err) {
-    if (err instanceof Error) {
-      error.value = err
-    }
-  }
-}, 750)
-
-watch(url, () => debouncedFetch(), { immediate: true })
+const searchStore = useSearchStore()
 </script>
 
 <style scoped>

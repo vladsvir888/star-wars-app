@@ -1,5 +1,5 @@
 <template>
-  <!-- default props "to" need in this case -->
+  <!-- default prop "to" need -->
   <RouterLink to="/" class="link">
     <slot></slot>
   </RouterLink>
