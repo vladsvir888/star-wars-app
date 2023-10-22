@@ -22,14 +22,13 @@
           icon="exclamation-octagon"
           :text="API_TEXT_ERROR"
         />
-        <template v-else-if="searchStore.data">
-          <AppCardList
-            title="Found people"
-            :data="searchStore.data.results"
-            :is-item-link="true"
-            class="search__card"
-          />
-        </template>
+        <AppCardList
+          v-else-if="searchStore.data"
+          title="Found people"
+          :data="searchStore.data.results"
+          :is-item-link="true"
+          class="search__card"
+        />
         <AppSpinner v-else />
       </div>
     </div>

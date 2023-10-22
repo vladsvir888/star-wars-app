@@ -23,8 +23,8 @@ export interface IPagination {
 }
 
 export interface IPersonCard {
-  id: string | null
   name: string
+  id: string | null
 }
 
 export interface IPersonDetailCard {

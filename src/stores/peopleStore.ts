@@ -34,10 +34,8 @@ export const usePeopleStore = defineStore('peopleStore', () => {
   )
 
   return {
-    allData,
     data,
     error,
-    id,
-    url
+    id
   }
 })

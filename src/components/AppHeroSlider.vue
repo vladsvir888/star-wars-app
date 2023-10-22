@@ -12,16 +12,13 @@
             <p class="hero-slider__description">{{ slide.text }}</p>
           </div>
           <div class="hero-slider__image-wrapper">
-            <picture>
-              <source type="image/webp" :srcset="`/images/hero-slide-${index + 1}.webp`" />
-              <img
-                :src="`/images/hero-slide-${index + 1}.jpg`"
-                :loading="slide?.image?.lazy ? 'lazy' : 'auto'"
-                alt=""
-                width="2048"
-                height="878"
-              />
-            </picture>
+            <img
+              :src="`/images/hero-slide-${index + 1}.jpg`"
+              :loading="slide?.image?.lazy ? 'lazy' : 'auto'"
+              alt=""
+              width="2048"
+              height="878"
+            />
           </div>
         </swiper-slide>
       </swiper-container>

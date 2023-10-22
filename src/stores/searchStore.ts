@@ -10,6 +10,7 @@ export const useSearchStore = defineStore('searchStore', () => {
   const error = ref<Error | null>(null)
   const searchText = ref('')
   const url = computed(() => `${API_BASE_URL}/people/?search=${searchText.value}`)
+
   const debouncedFetch = debounce(async () => {
     data.value = null
 
@@ -28,7 +29,6 @@ export const useSearchStore = defineStore('searchStore', () => {
     data,
     error,
     searchText,
-    url,
     debouncedFetch
   }
 })

@@ -1,11 +1,6 @@
 <template>
   <sl-card class="person-card">
-    <img
-      slot="image"
-      class="person-card__image"
-      :src="`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`"
-      :alt="name"
-    />
+    <img slot="image" class="person-card__image" :src="`/images/people/${id}.jpg`" :alt="name" />
     <h2 class="person-card__title">{{ name }}</h2>
     <div slot="footer">
       <AppLink
