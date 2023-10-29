@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
+import '@shoelace-style/shoelace/dist/components/card/card.js'
 import type { ICardList } from '@/types'
 import { getIdByRegex } from '@/utils/getIdByRegex'
-import '@shoelace-style/shoelace/dist/components/card/card.js'
 import AppLink from '@/components/AppLink.vue'
 
 defineProps<ICardList>()

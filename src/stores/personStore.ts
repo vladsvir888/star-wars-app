@@ -19,6 +19,7 @@ export const usePersonStore = defineStore('personStore', () => {
   >({})
   const data = ref<IPerson | null>(null)
   const error = ref<Error | null>(null)
+  const loading = ref(true)
   const dataStarships = ref<ICraft[] | null>(null)
   const dataVehicles = ref<ICraft[] | null>(null)
   const id = ref('')
@@ -33,33 +34,36 @@ export const usePersonStore = defineStore('personStore', () => {
       return
     }
 
-    data.value = null
-    dataStarships.value = null
-    dataVehicles.value = null
-
     try {
+      data.value = null
+      dataVehicles.value = null
+      dataStarships.value = null
+      loading.value = true
       data.value = await fetchData(url.value)
 
       if (data.value) {
-        dataStarships.value = await fetchDataWithPromiseAll(data.value.starships)
         dataVehicles.value = await fetchDataWithPromiseAll(data.value.vehicles)
-      }
+        dataStarships.value = await fetchDataWithPromiseAll(data.value.starships)
 
-      allData.value[id.value] = {
-        person: data.value as IPerson,
-        starships: dataStarships.value as ICraft[],
-        vehicles: dataVehicles.value as ICraft[]
+        allData.value[id.value] = {
+          person: data.value,
+          starships: dataStarships.value,
+          vehicles: dataVehicles.value
+        }
       }
     } catch (err) {
       if (err instanceof Error) {
         error.value = err
       }
+    } finally {
+      loading.value = false
     }
   })
 
   return {
     data,
     error,
+    loading,
     id,
     setId,
     dataStarships,

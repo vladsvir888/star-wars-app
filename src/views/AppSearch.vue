@@ -8,28 +8,25 @@
         @input="searchStore.debouncedFetch"
         label="Search"
         clearable
-        :disabled="!searchStore.data"
         :icon="{
           name: 'search'
         }"
         @clear="searchStore.searchText = ''"
       />
       <div class="search__content">
-        <AppAlert
-          v-if="searchStore.error"
-          variant="danger"
-          :closable="true"
-          icon="exclamation-octagon"
-          :text="API_TEXT_ERROR"
-        />
-        <AppCardList
-          v-else-if="searchStore.data"
-          title="Found people"
-          :data="searchStore.data.results"
-          :is-item-link="true"
-          class="search__card"
-        />
-        <AppSpinner v-else />
+        <component
+          :is="$route.meta.layout || 'div'"
+          :error="searchStore.error"
+          :loading="searchStore.loading"
+        >
+          <AppCardList
+            v-if="searchStore.data"
+            title="Found people"
+            :data="searchStore.data.results"
+            :is-item-link="true"
+            class="search__card"
+          />
+        </component>
       </div>
     </div>
   </div>
@@ -37,11 +34,8 @@
 
 <script setup lang="ts">
 import { useSearchStore } from '@/stores/searchStore'
-import { API_TEXT_ERROR } from '@/constants'
 import AppInput from '@/components/AppInput.vue'
-import AppSpinner from '@/components/AppSpinner.vue'
 import AppCardList from '@/components/AppCardList.vue'
-import AppAlert from '@/components/AppAlert.vue'
 
 const searchStore = useSearchStore()
 </script>

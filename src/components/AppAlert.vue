@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import type { IAlert } from '@/types'
 import '@shoelace-style/shoelace/dist/components/alert/alert.js'
+import type { IAlert } from '@/types'
 
 defineProps<IAlert>()
 </script>

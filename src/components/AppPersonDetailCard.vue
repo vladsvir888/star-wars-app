@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
+import '@shoelace-style/shoelace/dist/components/card/card.js'
 import type { IPersonDetailCard } from '@/types'
 import { transformTerm } from '@/utils/transformTerm.js'
-import '@shoelace-style/shoelace/dist/components/card/card.js'
 
 defineProps<IPersonDetailCard>()
 </script>

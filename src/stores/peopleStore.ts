@@ -8,6 +8,7 @@ export const usePeopleStore = defineStore('peopleStore', () => {
   const allData = ref<Record<string, IPeople>>({})
   const data = ref<IPeople | null>(null)
   const error = ref<Error | null>(null)
+  const loading = ref(true)
   const id = ref('1')
   const url = computed(() => `${API_BASE_URL}/people/?page=${id.value}`)
 
@@ -19,15 +20,20 @@ export const usePeopleStore = defineStore('peopleStore', () => {
         return
       }
 
-      data.value = null
-
       try {
+        data.value = null
+        loading.value = true
         data.value = await fetchData(url.value)
-        allData.value[id.value] = data.value as IPeople
+
+        if (data.value) {
+          allData.value[id.value] = data.value
+        }
       } catch (err) {
         if (err instanceof Error) {
           error.value = err
         }
+      } finally {
+        loading.value = false
       }
     },
     { immediate: true }
@@ -36,6 +42,7 @@ export const usePeopleStore = defineStore('peopleStore', () => {
   return {
     data,
     error,
+    loading,
     id
   }
 })

@@ -1,11 +1,9 @@
 <template>
   <header class="header">
     <div class="container header__container">
-      <span v-if="checkRoute">
-        <AppLink :to="{ name: 'Home' }" class="header__logo">
-          Star Wars <span class="visually-hidden">Home</span>
-        </AppLink>
-      </span>
+      <AppLink v-if="checkRoute" :to="{ name: 'Home' }" class="header__logo">
+        Star Wars <span class="visually-hidden">Home</span>
+      </AppLink>
       <p v-else class="header__logo">Star Wars</p>
       <AppNavigationMenu class="header__navigation-menu" />
       <AppSocials class="header__socials" />
@@ -17,12 +15,12 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import AppSocials from '@/components/AppSocials.vue'
 import AppIconButton from '@/components/AppIconButton.vue'
 import AppMenu from '@/components/AppMenu.vue'
 import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
 import AppLink from '@/components/AppLink.vue'
-import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const checkRoute = computed(() => {

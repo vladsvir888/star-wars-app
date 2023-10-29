@@ -9,7 +9,6 @@ export interface IInput {
   type?: string
   label: string
   clearable: boolean
-  disabled: boolean
   icon: {
     name: string
     slot?: string
