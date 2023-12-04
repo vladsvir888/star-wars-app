@@ -1,10 +1,11 @@
 <template>
-  <RouterLink class="link">
+  <!-- default prop "to" need -->
+  <RouterLink to="/" class="link">
     <slot></slot>
   </RouterLink>
 </template>
 
-<script setup></script>
+<script setup lang="ts"></script>
 
 <style scoped>
 .link {

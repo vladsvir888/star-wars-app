@@ -2,58 +2,41 @@
   <div class="people">
     <div class="container">
       <h1>People</h1>
-      <AppAlert
-        v-if="error"
-        :alert="{
-          variant: 'danger',
-          closable: true,
-          icon: 'exclamation-octagon',
-          text: API_TEXT_ERROR
-        }"
-      />
-      <div v-else-if="data" class="people__wrap">
-        <AppPagination
-          :pagination="{
-            previous: data.previous ? getIdByRegex(data.previous, /\d+/) : null,
-            next: data.next ? getIdByRegex(data.next, /\d+/) : null
-          }"
-          @pagination-click="(num) => (id = num)"
-        />
-        <ul class="people__list">
-          <li v-for="person in data.results" :key="person.name" class="people-list__item">
-            <AppPersonCard :name="person.name" :id="getIdByRegex(person.url, /\d+/)" />
-          </li>
-        </ul>
-      </div>
-      <AppSpinner v-else />
+      <component
+        :is="$route.meta.layout || 'div'"
+        :error="peopleStore.error"
+        :loading="peopleStore.loading"
+      >
+        <div v-if="peopleStore.data" class="people__wrap">
+          <AppPagination
+            :previous="
+              peopleStore.data.previous ? getIdByRegex(peopleStore.data.previous, /\d+/) : null
+            "
+            :next="peopleStore.data.next ? getIdByRegex(peopleStore.data.next, /\d+/) : null"
+            @pagination-click="(num) => (peopleStore.id = num as string)"
+          />
+          <ul class="people__list">
+            <li
+              v-for="person in peopleStore.data.results"
+              :key="person.name"
+              class="people-list__item"
+            >
+              <AppPersonCard :name="person.name" :id="getIdByRegex(person.url, /\d+/)" />
+            </li>
+          </ul>
+        </div>
+      </component>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, computed, watchEffect } from 'vue'
-import { getIdByRegex } from '@/utils/getIdByRegex.js'
-import { fetchData } from '@/utils/fetch.js'
-import { API_BASE_URL, API_TEXT_ERROR } from '@/constants'
+<script setup lang="ts">
+import { usePeopleStore } from '@/stores/peopleStore'
+import { getIdByRegex } from '@/utils/getIdByRegex'
 import AppPersonCard from '@/components/AppPersonCard.vue'
 import AppPagination from '@/components/AppPagination.vue'
-import AppSpinner from '@/components/AppSpinner.vue'
-import AppAlert from '@/components/AppAlert.vue'
 
-const data = ref(null)
-const error = ref(null)
-const id = ref('1')
-const url = computed(() => `${API_BASE_URL}/people/?page=${id.value}`)
-
-watchEffect(async () => {
-  data.value = null
-
-  try {
-    data.value = await fetchData(url.value)
-  } catch (err) {
-    error.value = err
-  }
-})
+const peopleStore = usePeopleStore()
 </script>
 
 <style scoped>

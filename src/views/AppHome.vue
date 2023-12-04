@@ -3,7 +3,7 @@
   <AppHeroSlider />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppHeroSlider from '@/components/AppHeroSlider.vue'
 </script>
 

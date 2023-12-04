@@ -2,16 +2,7 @@
   <section class="not-found container">
     <div class="not-found__wrapper">
       <div class="not-found__image-wrapper">
-        <picture>
-          <source type="image/webp" srcset="/images/not-found.webp" />
-          <img
-            src="/images/not-found.jpg"
-            class="not-found__image"
-            alt=""
-            width="964"
-            height="647"
-          />
-        </picture>
+        <img src="/images/not-found.jpg" class="not-found__image" alt="" width="964" height="647" />
       </div>
       <h1 class="not-found__title">THIS PAGE IS NOT FULLY ARMED AND OPERATIONAL.</h1>
       <AppLink :to="{ name: 'Home' }" class="link--hover link--decoration">Go to home</AppLink>
@@ -19,7 +10,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppLink from '@/components/AppLink.vue'
 </script>
 

@@ -1,18 +1,22 @@
 <template>
-  <sl-drawer :open="isMenuOpen" label="Menu" class="menu" @click="$emit('menu-close')">
-    <AppNavigationMenu class="menu__navigation-menu" :is-menu-open="isMenuOpen" />
+  <sl-drawer :open="isMenuOpen" label="Menu" class="menu" @sl-after-hide="$emit('menu-close')">
+    <AppNavigationMenu class="menu__navigation-menu" />
     <AppSocials class="menu__socials" />
   </sl-drawer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/drawer/drawer.js'
 import AppSocials from '@/components/AppSocials.vue'
 import AppNavigationMenu from '@/components/AppNavigationMenu.vue'
 
-defineProps({
-  isMenuOpen: Boolean
-})
+defineProps<{
+  isMenuOpen: boolean
+}>()
+
+defineEmits<{
+  (e: 'menu-close'): void
+}>()
 </script>
 
 <style scoped>

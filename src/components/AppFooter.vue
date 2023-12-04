@@ -7,7 +7,7 @@
   </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppSocials from '@/components/AppSocials.vue'
 </script>
 

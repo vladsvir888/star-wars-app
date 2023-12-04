@@ -126,7 +126,6 @@ body {
   flex-direction: column;
   height: 100%;
   background-image: url('/images/bg.jpg');
-  background-image: image-set(url('/images/bg.webp'), url('/images/bg.jpg'));
   background-position: center center;
   background-size: cover;
   color: var(--palette-white);

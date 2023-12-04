@@ -4,66 +4,40 @@
       <h1>Search</h1>
       <AppInput
         class="search__input"
-        v-model="searchText"
-        @input="debouncedFetch"
+        v-model="searchStore.searchText"
+        @input="searchStore.debouncedFetch"
         label="Search"
-        type="search"
         clearable
-        :disabled="!data"
         :icon="{
           name: 'search'
         }"
-        @clear="searchText = ''"
+        @clear="searchStore.searchText = ''"
       />
       <div class="search__content">
-        <AppAlert
-          v-if="error"
-          :alert="{
-            variant: 'danger',
-            closable: true,
-            icon: 'exclamation-octagon',
-            text: API_TEXT_ERROR
-          }"
-        />
-        <template v-else-if="data">
+        <component
+          :is="$route.meta.layout || 'div'"
+          :error="searchStore.error"
+          :loading="searchStore.loading"
+        >
           <AppCardList
+            v-if="searchStore.data"
             title="Found people"
-            :data="data.results"
+            :data="searchStore.data.results"
             :is-item-link="true"
             class="search__card"
           />
-        </template>
-        <AppSpinner v-else />
+        </component>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { debounce } from 'lodash-es'
-import { ref, computed, watch } from 'vue'
-import { fetchData } from '@/utils/fetch.js'
-import { API_BASE_URL, API_TEXT_ERROR } from '@/constants'
+<script setup lang="ts">
+import { useSearchStore } from '@/stores/searchStore'
 import AppInput from '@/components/AppInput.vue'
-import AppSpinner from '@/components/AppSpinner.vue'
 import AppCardList from '@/components/AppCardList.vue'
-import AppAlert from '@/components/AppAlert.vue'
 
-const data = ref(null)
-const error = ref(null)
-const searchText = ref('')
-const url = computed(() => `${API_BASE_URL}/people/?search=${searchText.value}`)
-const debouncedFetch = debounce(async () => {
-  data.value = null
-
-  try {
-    data.value = await fetchData(url.value)
-  } catch (err) {
-    error.value = err
-  }
-}, 750)
-
-watch(url, () => debouncedFetch(), { immediate: true })
+const searchStore = useSearchStore()
 </script>
 
 <style scoped>
