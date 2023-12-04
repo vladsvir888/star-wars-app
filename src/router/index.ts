@@ -20,7 +20,8 @@ const routes = [
     path: '/people/:id',
     name: 'Person',
     meta: {
-      layout: AppBaseLayoutVue
+      layout: AppBaseLayoutVue,
+      isPerson: true
     },
     component: () => import('@/views/AppPerson.vue')
   },

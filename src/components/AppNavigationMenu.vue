@@ -4,6 +4,7 @@
       <AppLink
         :to="link.to"
         class="link--decoration link--hover navigation-menu__link"
+        :class="link.to.name === checkPersonPage ? 'router-link-active' : ''"
         @click="$emit('menu-close')"
       >
         {{ link.text }}
@@ -13,8 +14,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import AppLink from '@/components/AppLink.vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const checkPersonPage = computed(() => {
+  if (route.meta.isPerson) return 'People'
+  return ''
+})
 
 defineEmits<{
   (e: 'menu-close'): void
