@@ -1,16 +1,15 @@
 <template>
-  <sl-alert class="alert" :variant="alert.variant" :closable="alert.closable" open>
-    <sl-icon slot="icon" :name="alert.icon"></sl-icon>
-    {{ alert.text }}
+  <sl-alert class="alert" :variant="variant" :closable="closable" open>
+    <sl-icon slot="icon" :name="icon"></sl-icon>
+    {{ text }}
   </sl-alert>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/alert/alert.js'
+import type { IAlert } from '@/types'
 
-defineProps({
-  alert: Object
-})
+defineProps<IAlert>()
 </script>
 
 <style scoped>

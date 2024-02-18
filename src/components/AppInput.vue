@@ -4,8 +4,6 @@
     :type="type ? type : 'text'"
     :label="label"
     :clearable="clearable"
-    :help-text="helpText"
-    :disabled="disabled"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
     @sl-clear="$emit('clear')"
@@ -14,21 +12,16 @@
   </sl-input>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/input/input.js'
 import '@shoelace-style/shoelace/dist/components/icon/icon.js'
+import type { IInput } from '@/types'
 
-defineProps({
-  type: String,
-  label: String,
-  clearable: Boolean,
-  icon: Object,
-  helpText: String,
-  disabled: Boolean,
-  modelValue: String
-})
-
-defineEmits(['update:modelValue', 'clear'])
+defineProps<IInput>()
+defineEmits<{
+  (e: 'update:modelValue', value: string): void
+  (e: 'clear'): void
+}>()
 </script>
 
 <style scoped></style>

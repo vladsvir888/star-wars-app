@@ -9,8 +9,9 @@
           v-if="isItemLink"
           :to="{ name: 'Person', params: { id: getIdByRegex(item.url, /\d+/) } }"
           class="link--decoration link--hover"
-          >{{ item.name }}</AppLink
         >
+          {{ item.name }}
+        </AppLink>
         <span v-else>{{ item.name }}</span>
       </li>
     </ul>
@@ -18,17 +19,13 @@
   </sl-card>
 </template>
 
-<script setup>
-import { getIdByRegex } from '@/utils/getIdByRegex'
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/card/card.js'
+import type { ICardList } from '@/types'
+import { getIdByRegex } from '@/utils/getIdByRegex'
 import AppLink from '@/components/AppLink.vue'
 
-defineProps({
-  type: String,
-  data: Array,
-  title: String,
-  isItemLink: Boolean
-})
+defineProps<ICardList>()
 </script>
 
 <style scoped>

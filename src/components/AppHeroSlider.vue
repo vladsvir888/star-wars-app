@@ -12,16 +12,13 @@
             <p class="hero-slider__description">{{ slide.text }}</p>
           </div>
           <div class="hero-slider__image-wrapper">
-            <picture>
-              <source type="image/webp" :srcset="`/images/hero-slide-${index + 1}.webp`" />
-              <img
-                :src="`/images/hero-slide-${index + 1}.jpg`"
-                :loading="slide?.image?.lazy ? 'lazy' : 'auto'"
-                alt=""
-                width="2048"
-                height="878"
-              />
-            </picture>
+            <img
+              :src="`/images/hero-slide-${index + 1}.jpg`"
+              :loading="slide?.image?.lazy ? 'lazy' : 'auto'"
+              alt=""
+              width="2048"
+              height="878"
+            />
           </div>
         </swiper-slide>
       </swiper-container>
@@ -29,13 +26,14 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { register } from 'swiper/element/bundle'
 
 register()
 
-const slider = ref(null)
+// any is temp solution https://github.com/nolimits4web/swiper/issues/6466
+const slider = ref(null) as any
 const slides = ref([
   {
     title: 'How the ILM Model Shop Brought Ahsoka’s T-6 Jedi Shuttle to Life',

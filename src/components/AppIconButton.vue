@@ -4,7 +4,7 @@
   </sl-icon-button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/icon-button/icon-button.js'
 </script>
 

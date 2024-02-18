@@ -1,11 +1,6 @@
 <template>
   <sl-card class="person-card">
-    <img
-      slot="image"
-      class="person-card__image"
-      :src="`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`"
-      :alt="name"
-    />
+    <img slot="image" class="person-card__image" :src="`/images/people/${id}.jpg`" :alt="name" />
     <h2 class="person-card__title">{{ name }}</h2>
     <div slot="footer">
       <AppLink
@@ -18,14 +13,12 @@
   </sl-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/card/card.js'
+import type { IPersonCard } from '@/types'
 import AppLink from '@/components/AppLink.vue'
 
-defineProps({
-  name: String,
-  id: String
-})
+defineProps<IPersonCard>()
 </script>
 
 <style scoped>

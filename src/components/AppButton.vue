@@ -4,7 +4,7 @@
   </sl-button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 </script>
 
